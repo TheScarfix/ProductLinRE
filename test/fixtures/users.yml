@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+normal1:
+  id: 1
+  name: "john"
+  email: "john@smith.com"
+  encrypted_password: "Qwertz2:3"
+
+normal2:
+  id: 2
+  name: "max"
+  email: "max@mustermann.de"
+  encrypted_password: "1234aB!e"
+
+

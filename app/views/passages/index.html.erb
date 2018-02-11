@@ -1,0 +1,73 @@
+<main class="container pt-3">
+  <%= render 'shared/alert_notice' %>
+  <div class="row">
+    <h1><%= t('.title', artifact: @artifact.name) %></h1>
+    <section class="col-sm-12">
+      <div class="btn-group btn-group-sm">
+        <%= link_to icon('plus', t('new_passage')), new_artifact_passage_path, class: 'btn btn-success' %>
+      </div>
+      <%= form_tag artifact_passages_path, :method => 'get', class: 'form-inline float-right' do %>
+        <div class="input-group">
+          <%= search_field_tag :search, params[:search], placeholder: t('search'), class: 'form-control form-control-sm' %>
+          <div class="input-group-append">
+            <%= button_tag :name => nil, class: 'btn btn-sm' do %>
+              <%= icon('search', t('search')) %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </section>
+    <section class="col-sm-12 pt-3">
+      <table class="table table-bordered table-striped table-hover table-responsive-md table-sm">
+        <thead class="thead-light">
+        <tr>
+          <th><%= Passage.human_attribute_name("name") %></th>
+          <th><%= Passage.human_attribute_name("filename") %></th>
+          <th><%= Passage.human_attribute_name("user") %></th>
+          <th><%= Passage.human_attribute_name("created_at") %></th>
+          <th><%= t('links') %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @passages.each do |passage| %>
+          <tr>
+            <td>
+              <%= file_name_with_icon(passage) %>
+            </td>
+            <td>
+              <%= passage.file.filename %>
+            </td>
+            <td>
+              <%= passage.user.name %>
+            </td>
+            <td>
+              <%= passage.created_at.getlocal.to_formatted_s(:long) %>
+            </td>
+            <td>
+              <div class="btn-group btn-group-sm">
+                <%= link_to icon('info', t('details')), passage, class: 'btn btn-primary' %>
+                <%= link_to icon('plus', t('passages.add_to_feature')), choose_feature_passage_path(passage), class: 'btn btn-success' %>
+                <% if check_user_permission(passage) %>
+                  <%= link_to icon('edit', t('edit')), edit_passage_path(passage), class: 'btn btn-secondary' %>
+                  <%= link_to icon('trash', t('destroy')), passage, method: :delete, data: {confirm: t('are_you_sure')}, class: 'btn btn-danger' %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </section>
+    <section class="col-sm-12 text-center">
+      <%= page_entries_info @passages %>
+      <%= will_paginate @passages, class: 'pagination pagination-sm justify-content-center pt-1', renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    </section>
+    <section class="col-sm-12">
+      <div class="btn-group btn-group-sm">
+        <%= link_to_if session[:cur_project_id], icon('arrow-left', t('back')), editor_index_path(project: session[:cur_project_id]), class: 'btn btn-secondary' do %>
+          <%= link_to icon('arrow-left', t('back')), editor_path, class: 'btn btn-secondary' %>
+        <% end %>
+      </div>
+    </section>
+  </div>
+</main>

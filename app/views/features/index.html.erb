@@ -1,0 +1,54 @@
+<main class="container pt-3">
+  <%= render 'shared/alert_notice' %>
+  <div class="row">
+    <h1><%= t('.title', project: @project.name) %></h1>
+    <section class="col-sm-12">
+      <div class="btn-group btn-group-sm">
+        <%= link_to icon('plus', t('new_feature')), new_project_feature_path, class: 'btn btn-success' %>
+      </div>
+    </section>
+    <section class="col-sm-12 pt-3">
+      <table class="table table-bordered table-striped table-hover table-responsive-md table-sm">
+        <thead class="thead-light">
+        <tr>
+          <th><%= Feature.human_attribute_name('name') %></th>
+          <th><%= Feature.human_attribute_name('description') %></th>
+          <th><%= Feature.human_attribute_name('created_at') %></th>
+          <th><%= t('links') %></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @features.each do |feature| %>
+          <tr>
+            <td><%= feature.name %></td>
+            <td><%= feature.description %></td>
+            <td>
+              <%= feature.created_at.getlocal.to_formatted_s(:long) %>
+            </td>
+            <td>
+              <div class="btn-group btn-group-sm">
+                <%= link_to icon('info', t('details')), feature, class: 'btn btn-primary' %>
+                <% if check_user_permission(feature.project) %>
+                  <%= link_to icon('edit', t('edit')), edit_feature_path(feature), class: 'btn btn-secondary' %>
+                  <%= link_to icon('trash', t('destroy')), feature, method: :delete, data: {confirm: t('are_you_sure')}, class: 'btn btn-danger' %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </section>
+    <section class="col-sm-12 text-center">
+      <%= page_entries_info @features %>
+      <%= will_paginate @features, class: 'pagination pagination-sm justify-content-center pt-1', renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    </section>
+    <section class="col-sm-12">
+      <div class="btn-group btn-group-sm">
+        <%= link_to icon('arrow-left', t('back')), editor_index_path(project: @project.id), class: 'btn btn-secondary' %>
+      </div>
+    </section>
+  </div>
+</main>
+

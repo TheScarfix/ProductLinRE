@@ -1,0 +1,26 @@
+<%# The ProductlinRE1 first view, it's the sign in view and the option to remember the entered password. %>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="form-group">
+      <div class="custom-control custom-checkbox">
+        <%= f.check_box :remember_me, class: 'custom-control-input' %>
+        <%= f.label :remember_me, class: 'custom-control-label' %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.submit t('devise.sessions.new.sign_in'), class: 'btn btn-primary' %>
+  </div>
+<% end %>

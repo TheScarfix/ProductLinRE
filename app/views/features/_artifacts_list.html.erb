@@ -1,0 +1,34 @@
+<section class="col-sm-12">
+  <table class="table table-bordered table-sm">
+    <thead class="thead-light">
+    <tr>
+      <th>
+        <%= t('features.associated_artifacts') %>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% if @feature.artifacts %>
+      <% @feature.artifacts.order(id: :asc).each do |artifact| %>
+        <tr>
+          <td class="list-group-item">
+            <%= file_name_with_icon(artifact) %>
+            <%= link_to t("details"), artifact, class: 'badge badge-secondary' %>
+            <% if @feature.project.user == current_user %>
+              <%= form_with model: @feature, url: delete_artifact_feature_path(@feature), method: :put do |form| %>
+                <%= form.hidden_field :artifact_id, value: artifact.id %>
+                <%= form.button icon('trash', t('delete')), data: {confirm: t('are_you_sure')}, class: 'btn btn-sm btn-danger' %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</section>
+<section class="col-sm-12 text-center">
+  <%= page_entries_info @artifacts %>
+  <%= will_paginate @artifacts, class: 'pagination pagination-sm justify-content-center pt-1', renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+</section>

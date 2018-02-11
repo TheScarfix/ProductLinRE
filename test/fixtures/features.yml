@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+delete:
+  name: Löschen
+  description: Beschreibung für Löschen
+
+edit:
+  name: Bearbeiten
+  description: Beschreibung für Editieren
+
+copy:
+  name: Kopieren
+  description: Beschreibung für Kopieren

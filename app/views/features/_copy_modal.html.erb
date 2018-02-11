@@ -1,0 +1,26 @@
+<div class="modal fade" id="copyFeature" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= t('copy_feature') %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_for @feature, url: copy_feature_path(@feature), method: :post do |form| %>
+        <div class="modal-body">
+          <%= form.hidden_field :feature_id, value: @feature.id, required: true %>
+          <div class="form-group">
+            <%= form.select :project_id, current_user.projects.collect { |p| [p.name, p.id] }, {}, {class: 'form-control'} %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= form.submit t('copy_feature'), class: 'btn btn-success' %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="this.form.reset()">
+            <%= t('close') %>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

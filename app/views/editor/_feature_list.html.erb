@@ -1,0 +1,46 @@
+<%# Feature list for the current project %>
+<h4><%= "Features" %>
+  <small><%= link_to icon('list', t('show_all')), project_features_path(project_id: @current_project.id), class: 'badge badge-secondary' %></small>
+</h4>
+<div class="card-columns pt-3">
+  <% @current_project.features.limit(5).each do |feature| %>
+    <div class="card">
+      <h5 class="card-header"> <%= feature.name %>
+        <%= link_to t("details"), feature, class: 'badge badge-secondary' %></h5>
+      <div class="card-body">
+        <p class="card-text"><%= feature.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <% i = 3 %>
+        <% if feature.artifacts %>
+          <% feature.artifacts.order(id: :asc).limit(i).each do |artifact| %>
+            <% i = i - 1 %>
+            <li class="list-group-item"><%= file_name_with_icon(artifact) %> <%= link_to t("details"), artifact, class: 'badge badge-secondary' %></li>
+          <% end %>
+        <% end %>
+        <% if feature.passages && i > 0 %>
+          <% feature.passages.order(id: :asc).limit(i).each do |passage| %>
+            <li class="list-group-item"><%= file_name_with_icon(passage) %></li>
+          <% end %>
+        <% end %>
+        <% if feature.artifacts.size + feature.passages.size > 3 %>
+          <%= link_to t('show_more'), feature, class: 'list-group-item list-group-item-action' %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%# create new feature %>
+  <% if current_user.id == @current_project.user_id %>
+    <%= link_to '#createFeature', data: {toggle: 'modal'} do %>
+      <div class="card text-white bg-success">
+        <div class="card-body text-center">
+          <%= icon('plus', class: 'fa-3x') %><br> <%= t("new_feature") %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<ul class="list-group text-center">
+  <%= link_to_if @current_project.features.size > 5, t('show_more'), project_features_path(@current_project), class: 'list-group-item list-group-item-action' do %>
+  <% end %>
+</ul>

@@ -1,0 +1,240 @@
+<main class="container pt-3">
+  <div class="row">
+    <h1><%= t('new_passage') %></h1>
+    <section class="col-sm-12">
+      <%= form_for [@artifact, Passage.new], html: {class: 'form-row'} do |form| %>
+        <%= form.error_messages %>
+
+        <%= form.hidden_field :user_id, value: current_user.id, required: true %>
+        <div class="form-group col-sm-12">
+          <%= form.label :name, Passage.human_attribute_name('name') %>
+          <%= form.text_field :name, id: :passage_name, class: "form-control", required: true %>
+        </div>
+        <div class="form-group col-sm-12">
+          <%= form.label :description, Passage.human_attribute_name('description') %>
+          <%= form.text_area :description, id: :passage_description, class: "form-control" %>
+        </div>
+
+        <% if @artifact.file.image? %>
+          <%= form.hidden_field :crop, value:"1x1+0+0" %>
+          <div class="form-group col-sm-12">
+            <label for="imgCanvas"><%= t('.select_with_mouse') %>:</label><br>
+            <canvas id="imgCanvas" width="<%= @artifact.file.metadata[:width] %>" height="<%= @artifact.file.metadata[:height] %>" class="img-thumbnail">
+            </canvas>
+          </div>
+        <% elsif @artifact.file.text? ||
+            @artifact.file.content_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+            @artifact.file.content_type == 'application/vnd.oasis.opendocument.text' %>
+          <% if @artifact.file.text? %>
+            <% text = @artifact.file.download %>
+          <% else %>
+            <% text = @artifact.get_text %>
+          <% end %>
+          <div class="form-group col-sm-12">
+            <label for="artifact">
+              <%= t('.text_selection') %>
+            </label>
+            <textarea readonly id="artifact" class="form-control" rows="10"><%= text %></textarea>
+          </div>
+
+          <div class="form-group col-sm-12">
+            <%= form.label :text %>
+            <%= form.text_area :text, id: 'text', rows: 10, class: 'form-control', required: true %>
+          </div>
+          <script>
+              let quotearea = document.getElementById('artifact');
+              let output = document.getElementById('text');
+              quotearea.addEventListener('mouseup', function () {
+                  if (this.selectionStart !== this.selectionEnd) { // check the user has selected some text inside field
+                      output.innerHTML = this.value.substring(this.selectionStart, this.selectionEnd);
+                  }
+              }, false)
+          </script>
+
+        <% elsif @artifact.file.video? or @artifact.file.audio? %>
+          <div class="col-sm-12">
+            <% if @artifact.file.video? %>
+              <%= video_tag(url_for(@artifact.file), preload: "metadata", controls: true, size: '800x450', id: "player") %>
+            <% end %>
+            <% if @artifact.file.audio? %>
+              <%= audio_tag(url_for(@artifact.file), preload: "metadata", controls: true, id: "player") %>
+            <% end %>
+          </div>
+          <div class="form-group col-sm-12">
+            <%= form.hidden_field :start %>
+            <%= form.hidden_field :duration %>
+            <p id="start"></p>
+            <div id="slider-range"></div>
+          </div>
+        <% end %>
+        <div class="form-group col-sm-12">
+          <%= form.submit class: 'btn btn-success' %>
+        </div>
+      <% end %>
+    </section>
+    <section class="col-sm-12">
+      <div class="btn-group btn-group-sm">
+        <%= link_to icon('arrow-left', t('back')), :back, class: 'btn btn-secondary' %>
+      </div>
+    </section>
+  </div>
+</main>
+
+<% if @artifact.file.audio? || @artifact.file.video? %>
+  <script>
+      let player;
+      let slider;
+      $(document).ready(function () {
+          player = document.getElementById("player");
+          slider = document.getElementById("slider-range");
+          player.onloadedmetadata = function () {
+              $("#slider-range")
+                  .slider({
+                      range: true,
+                      max: player.duration,
+                      values: [player.duration * 0.25, player.duration * 0.75],
+                      slide: function (event, ui) {
+                          sliderValuesToLabelText(false, ui);
+                      }
+                  });
+              sliderValuesToLabelText(true, undefined);
+          };
+
+      });
+
+      function sliderValuesToLabelText(init, ui) {
+          let starttime;
+          let endtime;
+          if (init) {
+              starttime = player.duration * 0.25;
+              endtime = player.duration * 0.75;
+          } else {
+              starttime = ui.values[0];
+              endtime = ui.values[1];
+          }
+
+          let duration = endtime - starttime;
+          document.getElementById("passage_start").value = starttime;
+          document.getElementById("passage_duration").value = duration;
+          let start = "Start " + formatSeconds(starttime);
+          let end = "End " + formatSeconds(endtime);
+          duration = "Duration " + formatSeconds(duration);
+          document.getElementById("start").innerHTML = start + " " + end + " " + duration;
+      }
+
+      function formatSeconds(sec) {
+          return appendZero(sec / 3600) + ':' + appendZero((sec % 3600) / 60) + ':' + appendZero((sec % 3600) % 60);
+      }
+
+      function appendZero(num) {
+          num = parseInt(num);
+          return num < 10 ? '0' + num : num;
+      }
+
+  </script>
+<% end %>
+
+<% if @artifact.file.image? %>
+  <script>
+      let mouseDown = 0;
+      let mousePos1;    //first point of the excerpt from the picture
+      let mousePos2;    //second point of the excerpt from the picture
+      let firstPoint = false; //variable to save mouse status. True when left
+      // mouse button is down
+      let canvas = document.getElementById('imgCanvas');
+      let context = canvas.getContext('2d');
+      let imageObj = new Image();
+      //getting the image from the artifact
+      imageObj.onload = function () {
+          canvas.height = imageObj.height;
+          canvas.width = imageObj.width;
+          context.drawImage(imageObj, 0, 0);
+      };
+      imageObj.src = '<%= url_for(@artifact.file.variant(resize:'1000>')) %>';
+
+      function saveValues() {
+          let x = Math.round(mousePos1.x);
+          let y = Math.round(mousePos1.y);
+          let w = Math.round(Math.abs(mousePos2.x - mousePos1.x));
+          let h = Math.round(Math.abs(mousePos2.y - mousePos1.y));
+          document.getElementById("passage_crop").value = w + "x" + h + "+" +
+              x + "+" + y;
+      }
+
+      function getMousePos(canvas, evt) {
+          let rect = canvas.getBoundingClientRect();
+          return {
+              x: evt.clientX - rect.left,
+              y: evt.clientY - rect.top
+          };
+      }
+
+      function clear_and_reload() {
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          context.drawImage(imageObj, 0, 0);
+      }
+
+      //function to draw the red rectangle
+      function drawRect() {
+          context.beginPath();
+          context.rect(mousePos1.x, mousePos1.y, mousePos2.x - mousePos1.x, mousePos2.y - mousePos1.y);
+          context.lineWidth = 5;
+          context.strokeStyle = 'red';
+          context.stroke();
+      }
+
+      //when left mouse button is pressed
+      function onMouseDown(evt) {
+          mousePos1 = getMousePos(canvas, evt);
+          firstPoint = true;
+      }
+
+      //when the mouse is moved over the canvas
+      function onMouseMove(evt) {
+          if (firstPoint === true) {
+              mousePos2 = getMousePos(canvas, evt);
+              clear_and_reload();
+              drawRect();
+          }
+      }
+
+      //when left mouse button is realeased
+      function onMouseUp(evt) {
+          mousePos2 = getMousePos(canvas, evt);
+          clear_and_reload();
+          drawRect();
+          firstPoint = false;
+          saveValues()
+      }
+
+      //binding the mouse events
+      canvas.addEventListener('mousedown', function (evt) {
+          onMouseDown(evt)
+      }, false);
+      canvas.addEventListener('mouseenter', function (evt) {
+          if (mouseDown === 1) {
+              onMouseDown(evt)
+          }
+      }, false);
+      canvas.addEventListener('mouseleave', function (evt) {
+          if (mouseDown === 1) {
+              onMouseUp(evt)
+          }
+      }, false);
+      canvas.addEventListener('mousemove', function (evt) {
+          onMouseMove(evt)
+      }, false);
+      canvas.addEventListener('mouseup', function (evt) {
+          onMouseUp(evt)
+      }, false);
+
+      document.onmousedown = function () {
+          mouseDown = 1;
+      };
+
+      document.onmouseup = function () {
+          mouseDown = 0;
+      };
+
+  </script>
+<% end %>

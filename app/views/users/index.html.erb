@@ -1,0 +1,48 @@
+<%# This view is the layout for showing all existing users with exclusive rights for the admin. %>
+
+<main class="container pt-3">
+  <div class="row">
+    <h1><%= User.model_name.human(count: 2) %></h1>
+    <section class="col-sm-12">
+      <% unless current_user.is_admin? %>
+        <table class="table table-bordered table-striped table-hover table-sm">
+          <thead class="thead-light">
+          <tr>
+            <th><%= User.human_attribute_name('name') %></th>
+            <th><%= User.human_attribute_name('email') %></th>
+            <th><%= User.human_attribute_name('description') %></th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.description %></td>
+              <td>
+                <div class="btn-group btn-group-sm">
+                  <%= link_to icon('info', t('details')), user, class: 'btn btn-primary' %>
+                  <% if user.id == current_user.id || current_user.is_admin? %>
+                    <%= link_to icon('edit', t('edit')), edit_registration_path(user), class: 'btn btn-secondary' %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </section>
+    <section class="col-sm-12 text-center">
+      <%= page_entries_info @users %>
+      <%= will_paginate @users, class: 'pagination pagination-sm justify-content-center pt-1', renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+    </section>
+    <section class="col-sm-12">
+      <div class="btn-group-sm">
+        <%= link_to icon('arrow-left', t('back')), :back, class: 'btn btn-secondary' %>
+      </div>
+    </section>
+  </div>
+</main>

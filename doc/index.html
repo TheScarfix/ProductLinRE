@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        File: README
+
+        &mdash; Documentation by YARD 0.9.12
+
+    </title>
+
+    <link rel="stylesheet" href="css/style.css" type="text/css"
+          charset="utf-8"/>
+
+    <link rel="stylesheet" href="css/common.css" type="text/css"
+          charset="utf-8"/>
+
+    <script type="text/javascript" charset="utf-8">
+        pathId = "README";
+        relpath = '';
+    </script>
+
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+</head>
+<body>
+<div class="nav_wrap">
+    <iframe id="nav" src="class_list.html?1"></iframe>
+    <div id="resizer"></div>
+</div>
+
+<div id="main" tabindex="-1">
+    <div id="header">
+        <div id="menu">
+
+            <a href="_index.html">Index</a> &raquo;
+            <span class="title">File: README</span>
+
+        </div>
+
+        <div id="search">
+
+            <a class="full_list_link" id="class_list_link"
+               href="class_list.html">
+
+                <svg width="24" height="24">
+                    <rect x="0" y="4" width="24" height="4" rx="1"
+                          ry="1"></rect>
+                    <rect x="0" y="12" width="24" height="4" rx="1"
+                          ry="1"></rect>
+                    <rect x="0" y="20" width="24" height="4" rx="1"
+                          ry="1"></rect>
+                </svg>
+            </a>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="content">
+        <div id='filecontents'>
+            <h1 id="label-README">README</h1>
+
+            <p>This readme covers the installation of the Ruby on Rails
+                application
+                ProductLinRE</p>
+
+            <h2 id="label-1.+Ruby+version+and+System+dependencies">1. Ruby
+                version and System dependencies</h2>
+            <ul>
+                <li>
+                    <p>minimum Ruby 2.3.0, Rails 5.2.0</p>
+                </li>
+            </ul>
+
+            <h3 id="label-Libraries+and+external+executables-3A">Libraries and
+                external executables:</h3>
+            <ul>
+                <li>
+                    <p>FFMpeg for video and audio editing</p>
+                </li>
+                <li>
+                    <p>ImageMagick for image editing (used by MiniMagick
+                        gem)</p>
+                </li>
+                <li>
+                    <p>SQLite3 as database server</p>
+                </li>
+                <li>
+                    <p>Apache2 with mod-passenger as web server (tested on,
+                        other servers like
+                        nginx might work too)</p>
+                </li>
+            </ul>
+
+            <h3 id="label-Example+package+names+for+Debian-2FUbuntu">Example
+                package names for Debian/Ubuntu</h3>
+            <ul>
+                <li>
+                    <p>ruby-dev</p>
+                </li>
+                <li>
+                    <p>ffmpeg</p>
+                </li>
+                <li>
+                    <p>imagemagick</p>
+                </li>
+                <li>
+                    <p>sqlite3-dev</p>
+                </li>
+                <li>
+                    <p>apache2-mod-passenger</p>
+                </li>
+            </ul>
+
+            <h2 id="label-2.+Setup+and+Configuration+-28for+development+and+testing-29">
+                2. Setup and Configuration (for development and testing)</h2>
+
+            <p>The application uses the gem Bundler for gem management, to
+                install all
+                gems needed to run the application run</p>
+
+            <pre class="code ruby"><code class="ruby"><span
+                    class='id identifier rubyid_bundle'>bundle</span> <span
+                    class='id identifier rubyid_install'>install</span>
+</code></pre>
+
+            <p>inside the application folder. If Bundler isn&#39;t installed
+                run</p>
+
+            <pre class="code ruby"><code class="ruby"><span
+                    class='id identifier rubyid_gem'>gem</span> <span
+                    class='id identifier rubyid_install'>install</span> <span
+                    class='id identifier rubyid_bundler'>bundler</span>
+</code></pre>
+
+            <p>To update the gems of the application run</p>
+
+            <pre class="code ruby"><code class="ruby"><span
+                    class='id identifier rubyid_bundle'>bundle</span> <span
+                    class='id identifier rubyid_update'>update</span>
+</code></pre>
+
+            <p>The configured gems are listed inside the Gemfile inside the
+                application
+                root folder</p>
+
+            <p>For more information about the gems used visit <a
+                    href="https://rubygems.org">rubygems.org</a></p>
+
+            <h2 id="label-3.+Deployment+-28for+staging+and+production-29">3.
+                Deployment (for staging and production)</h2>
+
+            <p>Deployment can be done with capistrano. In the /config/deploy
+                folder are
+                the stages where the remote servers are listed. In the
+                /config/deploy.rb
+                are settings for all stages. Deployment is done with SSH. To
+                make this work
+                SSH keys are needed.</p>
+
+            <p>Before deploying to a server a database.yml and master.key file
+                needs to
+                exist inside the /shared/config/ folder where you want to deploy
+                to. The
+                database.yml contains database installation information and a
+                database.yml.example is found in the git repository in the
+                /config/ folder.
+                The master.key contains the key used to encrypt credentials.</p>
+
+            <p>After the servers are configured deployment is started with
+                the</p>
+
+            <pre class="code ruby"><code class="ruby"><span
+                    class='id identifier rubyid_cap'>cap</span> <span
+                    class='op'>*</span><span
+                    class='id identifier rubyid_stagename'>stagename</span><span
+                    class='op'>*</span> <span
+                    class='id identifier rubyid_deploy'>deploy</span>
+</code></pre>
+
+            <p>This command fetches the latest git commit and installs it to the
+                configured deploy_to folder and migrates the database.</p>
+
+            <p>Further information about Capistrano is at <a
+                    href="http://capistranorb.com">capistranorb.com</a>/</p>
+
+            <h2 id="label-4.+Database">4. Database</h2>
+
+            <p>If you deployed the application with capistrano the database
+                should exist
+                in the shared folder of the application.</p>
+
+            <p>For development environments you need to run</p>
+
+            <pre class="code ruby"><code class="ruby"><span
+                    class='id identifier rubyid_rails'>rails</span> <span
+                    class='label'>db:</span><span
+                    class='id identifier rubyid_setup'>setup</span>
+</code></pre>
+
+            <p>to set the database up and seed it with values for testing</p>
+
+            <h2 id="label-5.+Localization">5. Localization</h2>
+
+            <p>The application uses the standard Ruby on Rails i18n gem to
+                provide
+                Internationalization. To localize the app to your language you
+                need to
+                create a .yml file inside the config/locale folder.</p>
+
+            <p>You should only need to create localization for the keys used
+                inside the
+                en.yml file and devise.en.yml file we provide.</p>
+
+            <p>The other keys are localized by other integrated gems like
+                devise-i18n or
+                rails-i18n.</p>
+
+            <p>For further information about localization visit <a
+                    href="http://guides.rubyonrails.org/i18n.html">guides.rubyonrails.org/i18n.html</a>
+            </p>
+        </div>
+    </div>
+
+    <div id="footer">
+        Generated on Sun Jan 7 12:24:53 2018 by
+        <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool"
+           target="_parent">yard</a>
+        0.9.12 (ruby-2.4.3).
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+editor:
+  id: 1
+  name: Editor
+  description: Beschreibung für den Editor

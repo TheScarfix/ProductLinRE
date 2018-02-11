@@ -1,0 +1,55 @@
+<%# This view shows the data of the signed in user, if the signed in user is an admin, the user is able to access other users data. %>
+<main class="container pt-3">
+  <%= render 'shared/alert_notice' %>
+  <div class="row">
+    <h1><%= t('.title', user: @user.name) %></h1>
+    <% if @user == current_user %>
+      <section class="col-sm-12">
+        <div class="btn-group btn-group-sm">
+          <%= link_to icon('edit', t('edit')), edit_registration_path(@user), class: 'btn btn-primary' %>
+        </div>
+      </section>
+    <% end %>
+    <section class="col-sm-12 pt-3">
+      <table class="table table-bordered table-sm">
+        <thead class="thead-light">
+        <tr>
+          <th>
+            <%= User.human_attribute_name('name') %>
+          </th>
+          <th>
+            <%= User.human_attribute_name('email') %>
+          </th>
+          <th>
+            <%= User.human_attribute_name('avatar') %>
+          </th>
+          <th>
+            <%= User.human_attribute_name('description') %>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            <%= @user.name %>
+          </td>
+          <td>
+            <%= @user.email %>
+          </td>
+          <td>
+            <%= image_tag(avatar_url(@user), class: 'rounded') %>
+          </td>
+          <td>
+            <%= @user.description %>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="col-sm-12">
+      <div class="btn-group btn-group-sm">
+        <%= link_to icon('arrow-left', t('back')), :back, class: 'btn btn-secondary' %>
+      </div>
+    </section>
+  </div>
+</main>

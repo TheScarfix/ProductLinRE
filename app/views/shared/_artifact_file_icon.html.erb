@@ -1,0 +1,11 @@
+<% if artifact.file.attached? %>
+  <% if artifact.file.image? %>
+    <%= icon('file-image-o', artifact.file.filename) %>
+  <% elsif artifact.file.audio? %>
+    <%= icon('file-audio-o', artifact.file.filename) %>
+  <% elsif artifact.file.video? %>
+    <%= icon('file-video-o', artifact.file.filename) %>
+  <% elsif artifact.file.text? %>
+    <%= icon('file-text-o', artifact.file.filename) %>
+  <% end %>
+<% end %>

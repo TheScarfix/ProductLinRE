@@ -1,0 +1,69 @@
+<%# Contains modal for Artifact creation %>
+
+<%# Artifact creation %>
+<div class="modal fade" id="createArtifact" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= t('new_artifact') %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= form_for Artifact.new do |form| %>
+        <div class="modal-body">
+
+          <%= form.hidden_field :user_id, value: current_user.id, required: true %>
+          <%= form.hidden_field :project, value: params[:project], required: true %>
+          <div class="form-group">
+            <%= form.label :name, Artifact.human_attribute_name('name') %>
+            <%= form.text_field :name, class: 'form-control', required: true %>
+          </div>
+          <div class="form-group">
+            <%= form.label :description, Artifact.human_attribute_name('description') %>
+            <%= form.text_area :description, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= form.label :file, Artifact.human_attribute_name('file') %>
+            <%= form.file_field :file, id: :artifact_file, accept: 'image/*,video/*,audio/*,.txt,.docx,.odt', class: 'form-control-file', required: true %>
+          </div>
+          <div id="progress" class="collapse">
+            <div class="progress">
+              <div id="progressbar" class="progress-bar progress-bar-striped" style="width: 0"></div>
+            </div>
+          </div>
+          <script>
+              addEventListener("direct-upload:initialize", event => {
+                  const progressElement = document.getElementById('progress');
+                  progressElement.classList.add('show');
+              });
+              addEventListener("direct-upload:start", event => {
+                  const progressBarElement = document.getElementById('progressbar');
+                  progressBarElement.innerText = '0%';
+              });
+              addEventListener("direct-upload:progress", event => {
+                  const {progress} = event.detail;
+                  const progressBarElement = document.getElementById('progressbar');
+                  progressBarElement.classList.add('progress-bar-animated');
+                  progressBarElement.innerText = `${progress}%`;
+                  progressBarElement.style.width = `${progress}%`;
+              });
+              addEventListener("direct-upload:end", event => {
+                  const progressBarElement = document.getElementById('progressbar');
+                  progressBarElement.style.width = '100%';
+                  progressBarElement.classList.add('bg-success');
+              });
+          </script>
+        </div>
+        <div class="modal-footer">
+          <%= form.submit class: 'btn btn-success' %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="this.form.reset()">
+            <%= t('close') %>
+          </button>
+
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

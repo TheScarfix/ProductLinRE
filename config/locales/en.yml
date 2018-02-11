@@ -1,0 +1,168 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  about_productlinre_html: "Handling features in software product lines is a non-trivial task that becomes more complex and error-prone as the number of features grows. Documentation errors or communication errors, for example, can lead to useless products being produced. To avoid such communication errors in the large number of features in the product line development, the support of the production plan by software tools is unavoidable.<br> There are already several tools to support the development of software product lines with various functionalities. Some of these tools work online, which simplifies their use because you do not have to deal with platforms, installations, and dependencies. There are not many of these tools, previous ones focus on modeling and configuring variability in software product lines. The product planning functionality has been neglected in these tools so far. The goal of this project is to create an online tool to enable the necessary product planning functionality of software product lines. Such tools can be used mainly in research and teaching in the field of software product lines."
+  about_productlinre_part2_html: "The online tool is being developed as an open source project. Key functionalities expected to be used in product planning of software product lines include the management of documentation and artifacts that are used as core assets in a software product line. ProductLinRE provides a repository  of artifacts which are used in development of features within a product line. It facilitates the application engineering process by automatic selection of relevant artifacts to each product.  With this functionality, users can only generate the appropriate artifacts and documentation necessary to communicate with product developers by selecting features for a particular product.<br>ProductLinRE is developed with regarding to the usability to make it easier to handle the requirements engineering of software product lines.<br>ProductLinRE was created on demand of Javad Ghofrani as student software project in 2017 by a team of following developers: Anna Lena Fehlhaber, Friederike Seyderhelm, Lennart Trunk, Hanna Novik, Martin Rodenberg, Christian Ruhe, Jonas Baethke and Elias Moualem."
+  back: "Back"
+  edit_artifact: "Edit Artifact"
+  show: "Show"
+  show_more: "Show more..."
+  search: "Search"
+  are_you_sure: "Are you sure?"
+  back_to_list: "Back to List"
+  new_passage: "New Passage"
+  update: "Update"
+  new_artifacts: "New Artifacts"
+  new_passages: "New Passages"
+  file: "File"
+  filename: "Filename"
+  name: "Name"
+  home: "Home"
+  sign_out: "Sign out"
+  profile: "Profile"
+  settings: "Settings"
+  details: "Details"
+  copy: "Copy"
+  copy_feature: "Copy Feature"
+  edit: "Edit"
+  delete: "Delete"
+  download: "Download"
+  destroy: "Delete"
+  show_all: "Show all"
+  back_to_editor: "Back to Editor"
+  new_project: "New Project"
+  new_feature: "New Feature"
+  new_artifact: "New Artifact"
+  new_product: "New Product"
+  new_passage: "New Passage"
+  was_successfully_created: "%{resource} was successfully created"
+  editor:
+    index:
+      title: "Overview of %{project}"
+    home:
+      welcome: "Welcome %{user}"
+    left_sidebar:
+      home: "Home"
+    matrix:
+      form_not_submit_warning: "You changed the Matrix but did not save. If you leave now the changes will not be saved!"
+      save_form_before_download: "Please save the Matrix before downloading Products."
+      save_matrix: "Save Matrix"
+    own_projects: "My Projects"
+    other_projects: "Other Projects"
+    current_project: "Current project"
+    overview: "Overview"
+    other_artifacts: "My other Artifacts"
+  artifacts:
+    add_to_feature: "Add to Feature"
+    show:
+      title: "Details of %{artifact}"
+    edit:
+      title: "Edit %{artifact}"
+    choose_feature:
+      title: "Add %{artifact} to a Feature"
+      choose_feature: "Choose the Feature you want to add the Artifact to:"
+  features:
+    index:
+      title: "Features of %{project}"
+    show:
+      title: "Details of %{feature}"
+    edit:
+      title: "Edit %{feature}"
+    add_new_associated_artifact_or_passage: "Add New Associated Artifact Or Passage"
+    associated_artifacts: "Associated Artifacts"
+    associated_passages: "Associated Passages"
+  passages:
+    add_to_feature: "Add to Feature"
+    index:
+      title: "Passages of %{artifact}"
+    edit:
+      title: "Edit %{passage}"
+    show:
+      title: "Details of %{passage}"
+    new:
+      select_with_mouse: "Select the section of the image with the mouse"
+    choose_feature:
+      title: "Add %{passage} to a Feature"
+      choose_feature: "Choose the Feature you want to add the Passage to:"
+  products:
+    index:
+      title: "Products of %{project}"
+    show:
+      title: "Details of %{product}"
+    edit:
+      title: "Edit %{product}"
+    connect_to_features_of_the_project: "Connect to Features of the Project"
+  projects:
+    show:
+      title: "Details of %{project}"
+    edit:
+      title: "Edit %{project}"
+  users:
+    show:
+      title: "Profile of %{user}"
+  activerecord:
+    models:
+      artifact:
+        one: "Artifact"
+        other: "Artifacts"
+      feature:
+        one: "Feature"
+        other: "Features"
+      project:
+        one: "Project"
+        other: "Projects"
+      passage:
+        one: "Passage"
+        other: "Passages"
+      product:
+        one: "Product"
+        other: "Products"
+      user:
+        one: "User"
+        other: "Users"
+    attributes:
+      artifact:
+        name: "Name"
+        description: "Description"
+        user: "Owner"
+      feature:
+        name: "Name"
+        description: "Description"
+      passage:
+      product:
+      project:
+        user: "Owner"
+      user:
+        name: "Username"
+        description: "Description"
+        email: "E-Mail"
+        avatar: "Avatar"

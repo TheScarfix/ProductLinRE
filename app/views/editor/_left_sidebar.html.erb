@@ -1,0 +1,43 @@
+<ul class="nav nav-pills flex-column">
+  <h4>
+    <%= Project.model_name.human(count: 2) %>
+    <small><%= link_to icon('list', t('show_all')), projects_path, class: 'badge badge-secondary' %></small>
+  </h4>
+  <%= form_tag projects_path, :method => 'get', class: 'form-inline' do %>
+    <div class="input-group">
+      <%= search_field_tag :search, params[:search], placeholder: t('search'), class: 'form-control form-control-sm' %>
+      <div class="input-group-append">
+        <%= button_tag :name => nil, class: 'btn btn-sm' do %>
+          <%= icon('search', t('search')) %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <h6 class="pt-3">
+    <%= t "editor.own_projects" %>
+    <%= link_to icon('plus', t('new_project')), '#createProject', class: 'badge badge-success', data: {toggle: 'modal'} %>
+  </h6>
+  <% @own_projects.each do |project| %>
+    <li class="nav-item text-truncate">
+      <%= link_to_unless_current project.name, editor_index_path(project: project.id), class: 'nav-link' do %>
+        <span class="nav-link active"><%= project.name %></span>
+      <% end %>
+    </li>
+  <% end %>
+  <% if current_user.projects.size > 5 %>
+    <li class="nav-item"><%= link_to t('show_more'), projects_path(user: current_user.id), class: 'nav-link' %></li>
+  <% end %>
+  <h6 class="pt-3"><%= t "editor.other_projects" %>
+  </h6>
+  <% @other_projects.limit(5).each do |project| %>
+    <li class="nav-item">
+      <%= link_to_unless_current project.name, editor_index_path(project: project.id), class: 'nav-link' do %>
+        <span class="nav-link active"><%= project.name %></span>
+      <% end %>
+    </li>
+  <% end %>
+  <% if @other_projects.size > 5 %>
+    <li class="nav-item"><%= link_to t('show_more'), projects_path, class: 'nav-link' %></li>
+  <% end %>
+</ul>
+
