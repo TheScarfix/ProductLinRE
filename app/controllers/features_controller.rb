@@ -36,7 +36,7 @@ class FeaturesController < ApplicationController
     @feature = @project.features.create(feature_params)
     respond_to do |format|
       if @feature.save
-        format.html { redirect_to @feature, notice: "Feature was successfully created." }
+        format.html { redirect_to editor_path(project: @feature.project.id), notice: "Feature was successfully created." }
         format.json { render :show, status: :created, location: @feature }
       else
         format.html { render :new }

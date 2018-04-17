@@ -36,7 +36,7 @@ class Project < ApplicationRecord
         end
       end
     end
-    artifacts
+    artifacts.sort!{|a, b| b <=> a}
   end
 
   def list_artifact_ids

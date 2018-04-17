@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 5.2.0rc1"
+gem "rails", "5.2.0rc2"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3"
 
@@ -52,7 +52,7 @@ gem "jquery-ui-rails"
 gem "rubyzip", "~> 1.2"
 
 # Fontawesome
-gem "font-awesome-sass"
+gem "font-awesome-sass", "~>4.7"
 
 # Internationalization Data
 gem "rails-i18n"

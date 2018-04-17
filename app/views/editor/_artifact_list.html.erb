@@ -20,7 +20,7 @@
   <% end %>
 </h6>
 <ul class="list-group">
-  <% @current_project.list_artifacts.last(5).each do |artifact| %>
+  <% @current_project.list_artifacts.each do |artifact| %>
     <li class="list-group-item">
       <% if artifact.file.attached? %>
         <% if artifact.file.image? %>
@@ -46,8 +46,6 @@
         <% end %>
       </ul>
     </li>
-  <% end %>
-  <%= link_to_if @current_project.list_artifacts.size > 5, t('show_more'), artifacts_path(project: @current_project.id), class: 'list-group-item list-group-item-action' do %>
   <% end %>
   <h6 class="pt-3"><%= t 'editor.other_artifacts' %></h6>
   <% current_user.artifacts.limit(5).each do |artifact| %>
