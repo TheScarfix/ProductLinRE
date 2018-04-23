@@ -11,10 +11,11 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
   - cp config/storage.yml.travis config/storage.yml
+  - sudo ln -s /usr/bin/avconv /usr/bin/ffmpeg
 
 before_install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y imagemagick ffmpeg
+  - sudo apt-get install -y libav-tools
 
 cache:
   - bundler
