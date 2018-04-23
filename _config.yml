@@ -14,7 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: ProductLinRE
-email: lennart.trunk@outlook.de
+email: the_scarfix@outlook.de
 description: >- # this means to ignore newlines until "baseurl:"
   ProductLinRE is a Product Line Management Tool for Software Requirements Engineering
   originally developed by a student group for the Software Engineering Group
