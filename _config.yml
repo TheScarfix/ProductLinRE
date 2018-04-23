@@ -15,22 +15,14 @@
 # in the templates via {{ site.myvariable }}.
 title: ProductLinRE
 email: the_scarfix@outlook.de
-description: >- # this means to ignore newlines until "baseurl:"
-  ProductLinRE is a Product Line Management Tool for Software Requirements Engineering
-  originally developed by a student group for the Software Engineering Group
-   at the Leibniz Universität Hannover.
 baseurl: "/ProductLinRE" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-# twitter_username: 
-github_username:  TheScarfix
 
 # Build settings
 markdown: kramdown
 theme: jekyll-theme-leap-day
 plugins:
   - jekyll-feed
-
-show_excerpts: true
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
