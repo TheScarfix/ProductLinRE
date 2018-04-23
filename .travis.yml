@@ -12,6 +12,7 @@ before_script:
   - cp config/database.yml.travis config/database.yml
   - cp config/storage.yml.travis config/storage.yml
   - sudo ln -s /usr/bin/avconv /usr/bin/ffmpeg
+  - rails db:test:prepare
 
 before_install:
   - sudo apt-get -qq update
