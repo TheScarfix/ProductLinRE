@@ -14,7 +14,10 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: ProductLinRE
-email: the_scarfix@outlook.de
+description: >- # this means to ignore newlines until "baseurl:"
+  ProductLinRE is a Product Line Management Tool for Software Requirements Engineering
+  originally developed by a student group for the Software Engineering Group
+   at the Leibniz Universität Hannover.
 baseurl: "/ProductLinRE" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
