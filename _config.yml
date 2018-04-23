@@ -16,7 +16,9 @@
 title: ProductLinRE
 email: lennart.trunk@outlook.de
 description: >- # this means to ignore newlines until "baseurl:"
-  ProductLinRE is a Project Line Management Tool for Software Requirements Engineering.
+  ProductLinRE is a Product Line Management Tool for Software Requirements Engineering
+  originally developed by a student group for the Software Engineering Group
+   at the Leibniz Universität Hannover.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: 
