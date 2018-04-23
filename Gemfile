@@ -1,114 +1,29 @@
-# frozen_string_literal: true
-
 source "https://rubygems.org"
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
+# Hello! This is where you manage which Jekyll version is used to run.
+# When you want to use a different version, change it below, save the
+# file and run `bundle install`. Run Jekyll with `bundle exec`, like so:
+#
+#     bundle exec jekyll serve
+#
+# This will help ensure the proper Jekyll version is running.
+# Happy Jekylling!
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "5.2.0rc2"
-# Use sqlite3 as the database for Active Record
-gem "sqlite3"
+# This is the default theme for new Jekyll sites. You may change this to anything you like.
+gem "minima"
 
+# If you want to use GitHub Pages, remove the "gem "jekyll"" above and
+# uncomment the line below. To upgrade, run `bundle update github-pages`.
+gem "github-pages", group: :jekyll_plugins
 
-# Use Puma as the app server
-gem "puma"
-# Use SCSS for stylesheets
-gem "sass-rails", "~> 5.0"
-# Use Uglifier as compressor for JavaScript assets
-gem "uglifier", ">= 1.3.0"
-# Use CoffeeScript for .coffee assets and views
-gem "coffee-rails", "~> 4.2"
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem "turbolinks", "~> 5"
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 2.5"
-
-
-# Use ActiveModel has_secure_password
-gem "bcrypt", git: "https://github.com/codahale/bcrypt-ruby.git", require: "bcrypt"
-
-# Image manipulation
-gem "mini_magick"
-
-# Devise with security-extension for User Authentication with Captcha
-gem "devise", "~> 4.4.0"
-gem "devise-i18n"
-
-# Testing
-gem "rspec-rails"
-# gem 'rails_helper', '~> 2.2', '>= 2.2.2'
-
-# Bootstrap
-gem "bootstrap"
-gem "jquery-rails"
-
-# jQuery UI
-gem "jquery-ui-rails"
-
-# rubyzip
-gem "rubyzip", "~> 1.2"
-
-# Fontawesome
-gem "font-awesome-sass", "~>4.7"
-
-# Internationalization Data
-gem "rails-i18n"
-
-# Easier routing for internationalization
-gem "routing-filter"
-
-# Form helper
-gem "dynamic_form"
-
-# Text extraction from Apache Tika compatible files
-gem "henkei"
-
-
-# Active Record Pagination
-gem "will_paginate"
-gem "bootstrap-will_paginate"
-
-# Browser language detection
-gem "http_accept_language"
-
-# Easy cloning of active_record objects including associations and several operations under associations and attributes.
-gem "amoeba"
-
-group :production do
-# Use Redis adapter to run Action Cable in production
-  gem "redis"
-# Use postgreSQL as database for Active Record
-  gem "pg"
-# See https://github.com/rails/execjs#readme for more supported runtimes
-  gem "therubyracer", platforms: :ruby
-end
-
-
-# Use Capistrano for deployment
-group :development do
-  gem "capistrano-passenger"
-  gem "capistrano-rails"
-  gem "capistrano-rvm"
-end
-
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem "byebug", platforms: %i[mri mingw x64_mingw]
-  # Adds support for Capybara system testing and selenium driver
-  gem "capybara", ">= 2.13"
-  gem "rails-erd"
-  gem "rubocop-rails"
-  gem "selenium-webdriver"
-  gem "yard"
-end
-
-group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem "web-console", ">= 3.3.0"
+# If you have any plugins, put them here!
+group :jekyll_plugins do
+  gem "jekyll-feed", "~> 0.6"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Performance-booster for watching directories on Windows
+gem "wdm", "~> 0.1.0" if Gem.win_platform?
+
