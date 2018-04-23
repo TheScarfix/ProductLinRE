@@ -24,7 +24,7 @@ show_downloads: "false"
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-leap-day
+theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
 
