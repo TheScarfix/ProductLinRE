@@ -4,7 +4,32 @@ rvm:
  - 2.5
 
 services:
- - postgresql
+ - redis-server
+
+
+addons:
+
+  postgresql: "9.6"
+
+  chrome: stable
+
+  apt:
+
+    sources:
+
+      - sourceline: "ppa:mc3man/trusty-media"
+
+      - sourceline: "ppa:ubuntuhandbook1/apps"
+
+    packages:
+
+      - ffmpeg
+
+      - mupdf
+
+      - mupdf-tools
+
+      - poppler-utils
 
 
 before_script:
@@ -15,9 +40,12 @@ before_script:
   - bundle exec rails db:test:prepare
 
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y libav-tools
-  - gem update --system
+
+  - "rm ${BUNDLE_GEMFILE}.lock"
+
+  - "travis_retry gem update --system"
+
+  - "travis_retry gem install bundler"
 
 cache:
   - bundler
