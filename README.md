@@ -1,6 +1,6 @@
 # README [![Build Status](https://travis-ci.org/TheScarfix/ProductLinRE.svg?branch=master)](https://travis-ci.org/TheScarfix/ProductLinRE)
 
-This readme covers the installation of the Ruby on Rails application ProductLinRE
+This readme covers the installation of the Ruby on Rails application ProductLinRE (www.productlinre.com)
 
 ## 1. Ruby version and System dependencies
 * minimum Ruby 2.3.0, Rails 5.2.0
