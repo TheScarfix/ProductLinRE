@@ -1,6 +1,16 @@
 # README [![Build Status](https://travis-ci.org/TheScarfix/ProductLinRE.svg?branch=master)](https://travis-ci.org/TheScarfix/ProductLinRE)
 
+
 This readme covers the installation of the Ruby on Rails application ProductLinRE (www.productlinre.com)
+* Please cite the paper if you use the ProductLinRE (@inproceedings{ghofrani2018productlinre,
+  title={ProductlinRE: online management tool for requirements engineering of software product lines},
+  author={Ghofrani, Javad and Fehlhaber, Anna Lena},
+  booktitle={Proceeedings of the 22nd International Conference on Systems and Software Product Line-Volume 2},
+  pages={17--22},
+  year={2018},
+  organization={ACM}
+})
+
 
 ## 1. Ruby version and System dependencies
 * minimum Ruby 2.3.0, Rails 5.2.0
