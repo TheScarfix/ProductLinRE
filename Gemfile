@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "5.2.0rc2"
+gem "rails", "~>5.2"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3"
 
@@ -34,7 +34,7 @@ gem "bcrypt", git: "https://github.com/codahale/bcrypt-ruby.git", require: "bcry
 gem "mini_magick"
 
 # Devise with security-extension for User Authentication with Captcha
-gem "devise", "~> 4.4.0"
+gem "devise", "~> 4"
 gem "devise-i18n"
 
 # Testing
