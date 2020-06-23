@@ -49,7 +49,7 @@ gem "jquery-rails"
 gem "jquery-ui-rails"
 
 # rubyzip
-gem "rubyzip", "~> 1.2"
+gem "rubyzip", "~> 2.3"
 
 # Fontawesome
 gem "font-awesome-sass", "~>4.7"
