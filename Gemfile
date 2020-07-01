@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~>5.2"
+gem "rails", "~>6.0"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3"
 
@@ -16,11 +16,11 @@ gem "sqlite3"
 # Use Puma as the app server
 gem "puma"
 # Use SCSS for stylesheets
-gem "sass-rails", "~> 5.0"
+gem "sass-rails", "~> 6.0"
 # Use Uglifier as compressor for JavaScript assets
 gem "uglifier", ">= 1.3.0"
 # Use CoffeeScript for .coffee assets and views
-gem "coffee-rails", "~> 4.2"
+gem "coffee-rails", "~> 5.0"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -49,10 +49,10 @@ gem "jquery-rails"
 gem "jquery-ui-rails"
 
 # rubyzip
-gem "rubyzip", "~> 1.2"
+gem "rubyzip", "~> 2.3"
 
 # Fontawesome
-gem "font-awesome-sass", "~>4.7"
+gem "font-awesome-sass", "~>5.13"
 
 # Internationalization Data
 gem "rails-i18n"
