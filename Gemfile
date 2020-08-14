@@ -28,7 +28,7 @@ gem "jbuilder", "~> 2.5"
 
 
 # Use ActiveModel has_secure_password
-gem "bcrypt", git: "https://github.com/codahale/bcrypt-ruby.git", require: "bcrypt"
+gem "bcrypt"
 
 # Image manipulation
 gem "mini_magick"
