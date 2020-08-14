@@ -63,11 +63,11 @@ GEM
     amoeba (3.1.0)
       activerecord (>= 3.2.6)
     ast (2.4.0)
-    autoprefixer-rails (9.7.6)
+    autoprefixer-rails (9.8.6.1)
       execjs
     bcrypt (3.1.13)
     bindex (0.8.1)
-    bootstrap (4.5.0)
+    bootstrap (4.5.2)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
@@ -107,7 +107,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.7)
     crass (1.0.6)
     devise (4.7.2)
       bcrypt (~> 3.0)
@@ -132,7 +132,7 @@ GEM
       json (>= 1.8, < 3)
       mime-types (>= 1.23, < 4)
     http_accept_language (2.1.1)
-    i18n (1.8.3)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
@@ -322,7 +322,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.25)
-    zeitwerk (2.3.1)
+    zeitwerk (2.4.0)
 
 PLATFORMS
   ruby
