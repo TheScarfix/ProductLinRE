@@ -52,7 +52,7 @@ gem "jquery-ui-rails"
 gem "rubyzip", "~> 2.3"
 
 # Fontawesome
-gem "font-awesome-sass", "~>5.13"
+gem "font-awesome-sass", "~>5.15"
 
 # Internationalization Data
 gem "rails-i18n"
